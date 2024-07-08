@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <section id="productos">
+
+    </section>
+
+    <script>
+        fetch('/productos')
+            .then(response => response.json())
+            .then(data => {
+                const productos = data;
+                console.log(productos)
+                const productosContainer = document.querySelector('#productos');
+
+                productos.forEach(producto => {
+                    const productoElement = document.createElement('div');
+                    productoElement.innerHTML = `
+                        <h2>${producto.nombre}</h2>
+                        <p>${producto.descripcion}</p>
+                        <ul>
+                            <li>Id: ${producto.id_producto}</li>
+                            <li>Categoría: ${producto.categoria}</li>
+                            <li>Stock: ${producto.stock}</li>
+ 
+                        </ul>
+                        <strong>$ ${producto.precio}</strong>
+                        
+                    `;
+                    productosContainer.appendChild(productoElement);
+                });
+            });
+    </script>
+
+
+
+    
+</body>
+</html>
